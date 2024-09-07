@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+set -u
+
+source /var/vcap/jobs/nginx/config/export_env.sh
+source ${JOB_DIR}/helpers/utils.sh
+redirect_output nginx
+
+pidfile=${RUN_DIR}/nginx.pid
+
+case ${1} in
+
+  start)
+    pid_guard nginx ${pidfile}
+
+    log 'Starting nginx'
+    exec chpst -u vcap:vcap /var/vcap/packages/nginx/sbin/nginx -g "pid ${pidfile};" \
+      -c ${JOB_DIR}/config/nginx.conf \
+      -e ${LOG_DIR}/error.log \
+      -p ${TMP_DIR}
+    ;;
+
+  stop)
+    kill_and_wait nginx ${pidfile} 25
+    ;;
+
+  *)
+    echo "Usage: ${0} {start|stop}"
+    ;;
+
+esac

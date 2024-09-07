@@ -1,0 +1,10 @@
+---
+name: nginx
+
+templates:
+  bin/agent.erb: bin/agent
+  bin/pre-start.erb: bin/pre-start
+  config/export_env.sh.erb: config/export_env.sh
+  config/nginx.conf.erb: config/nginx.conf
+  config/upstream.conf.erb: config/upstream.conf
+  helpers/utils.sh: helpers/utils.sh

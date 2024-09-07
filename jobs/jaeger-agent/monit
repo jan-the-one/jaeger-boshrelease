@@ -1,0 +1,5 @@
+check process agent
+  with pidfile /var/vcap/sys/run/jaeger/agent.pid
+  start program "/var/vcap/jobs/jaeger/bin/agent start"
+  stop program "/var/vcap/jobs/jaeger/bin/agent stop"
+  group vcap

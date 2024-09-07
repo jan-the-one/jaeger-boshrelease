@@ -1,0 +1,26 @@
+---
+name: nginx
+
+templates:
+  bin/nginx.erb: bin/nginx
+  bin/pre-start.erb: bin/pre-start
+  config/export_env.sh.erb: config/export_env.sh
+  config/nginx.conf.erb: config/nginx.conf
+  config/upstream.conf.erb: config/upstream.conf
+  helpers/utils.sh: helpers/utils.sh
+
+properties:
+  upstreams:
+    description: The upstream servers
+    example: |
+      - name: default # Unique name of the upstream
+        target: HTTP Upstream Address of the service which should be protected, nginx upstream parameters could be appended
+        listen_port: 3000 # Port to access the upstream
+        ssl_cert: SSL certificate
+        ssl_key: SSL certificate key
+        ssl_ca: SSL CA certificate
+        ssl_session_timeout: 5m # Specifies a time during which a client may reuse the session parameters.
+        ssl_ciphers: HIGH:!aNULL:!MD5 # Specifies the enabled ciphers
+        ssl_protocols: TLSv1.2 TLSv1.3 #Enables the specified protocols.
+        ssl_verify_client: Enables verification of client certificates
+        ssl_client_certificate: Specifies a file with trusted CA certificates in the PEM format used to verify client certificates

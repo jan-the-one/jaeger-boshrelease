@@ -1,0 +1,8 @@
+---
+name: jaeger
+
+dependencies:
+
+files:
+  - jaeger/agent-linux-amd64
+  - jaeger/collector-linux-amd64
