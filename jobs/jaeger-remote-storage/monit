@@ -1,0 +1,5 @@
+check process r_storage
+  with pidfile /var/vcap/sys/run/jaeger-remote-storage/r_storage.pid
+  start program "/var/vcap/jobs/jaeger-remote-storage/bin/r_storage.sh start"
+  stop program "/var/vcap/jobs/jaeger-remote-storage/bin/r_storage.sh stop"
+  group vcap

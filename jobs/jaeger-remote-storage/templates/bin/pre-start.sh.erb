@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+set -u
+
+source /var/vcap/jobs/jaeger-remote-storage/config/export_env.sh
+source ${JOB_DIR}/helpers/utils.sh
+
+echo "Creating base directories"
+
+for dir in ${RUN_DIR} ${LOG_DIR} ${TMP_DIR}; do
+  mkdir -p ${dir}
+  chown vcap:vcap ${dir}
+done
+
+echo "Finished creating base directories"

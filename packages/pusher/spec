@@ -1,0 +1,8 @@
+---
+name: pusher
+
+dependencies:
+  - jaeger
+
+files:
+  - pusher/*.tgz

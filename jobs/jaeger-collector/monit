@@ -1,5 +1,5 @@
 check process collector
-  with pidfile /var/vcap/sys/run/jaeger/collector.pid
-  start program "/var/vcap/jobs/jaeger/bin/collector start"
-  stop program "/var/vcap/jobs/jaeger/bin/collector stop"
+  with pidfile /var/vcap/sys/run/jaeger-collector/collector.pid
+  start program "/var/vcap/jobs/jaeger-collector/bin/collector.sh start"
+  stop program "/var/vcap/jobs/jaeger-collector/bin/collector.sh stop"
   group vcap

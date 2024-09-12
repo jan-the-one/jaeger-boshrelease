@@ -1,10 +1,8 @@
 ---
-name: nginx
-
+name: jaeger-collector
+packages: 
+  - jaeger
 templates:
-  bin/agent.erb: bin/agent
-  bin/pre-start.erb: bin/pre-start
+  bin/collector.sh.erb: bin/collector.sh
+  bin/pre-start.sh.erb: bin/pre-start.sh
   config/export_env.sh.erb: config/export_env.sh
-  config/nginx.conf.erb: config/nginx.conf
-  config/upstream.conf.erb: config/upstream.conf
-  helpers/utils.sh: helpers/utils.sh

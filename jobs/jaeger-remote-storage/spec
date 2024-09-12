@@ -1,0 +1,8 @@
+---
+name: jaeger-remote-storage
+packages: 
+  - jaeger
+templates:
+  bin/r_storage.sh.erb: bin/r_storage.sh
+  bin/pre-start.sh.erb: bin/pre-start.sh
+  config/export_env.sh.erb: config/export_env.sh

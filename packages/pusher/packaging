@@ -1,0 +1,11 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+export HOME=/var/vcap
+
+cd pusher
+tar -xzf pusher.tgz
+chmod +x pusher
+
+mkdir -p $BOSH_INSTALL_TARGET/bin
+cp -a pusher $BOSH_INSTALL_TARGET/bin

@@ -8,6 +8,10 @@
 - Add the grpcClient to Jaeger as a package []
 - Write job scripts []
 - Add properties for the configs of each component []
+- * In particular, add properties to specify details of Jaeger Query (dashboard), and external storages like Cassandra
+- * * 
+- Explore NGINX-based tracing []
+- Explore OpenTelemetry relations to Prometheus/Graphite []
 
 
 ---
