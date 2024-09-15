@@ -3,7 +3,7 @@ name: jaeger-test
 
 releases:
 - name: jaeger
-  version: 0+dev.1726344765
+  version: 0+dev.1726407841
 
 stemcells:
 - alias: default
