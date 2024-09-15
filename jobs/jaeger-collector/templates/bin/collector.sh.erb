@@ -5,7 +5,7 @@ set -u
 
 source /var/vcap/jobs/jaeger-collector/config/export_env.sh
 
-PIDFILE=${RUN_DIR}/jaeger-collector.pid
+PIDFILE=${RUN_DIR}/collector.pid
 
 case ${1} in
 
@@ -13,11 +13,6 @@ case ${1} in
     echo $$ > $PIDFILE
 
     echo "Starting Jaeger collector.."
-
-    #BUG REPORT ?
-    # The process is started correctly, but for some reason monit ends up considering the process as failed and keeps restarting it
-    # However, the process is actually still running and it is never "erased"
-    # Perhaps we should switch to the BPM mode, or check the kill_and_wait ideas of nginx?
     
     exec chpst -u vcap:vcap /var/vcap/packages/jaeger/bin/jaeger/collector-linux-amd64 \
     --span-storage.type=memory \
