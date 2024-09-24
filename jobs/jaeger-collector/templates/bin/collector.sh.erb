@@ -14,9 +14,7 @@ case ${1} in
 
     echo "Starting Jaeger collector.."
     
-    exec chpst -u vcap:vcap /var/vcap/packages/jaeger/bin/jaeger/collector-linux-amd64 \
-    --span-storage.type=memory \
-    --collector.zipkin.host-port=:9411 \
+    exec chpst -u vcap:vcap /var/vcap/packages/jaeger/bin/collector-linux-amd64 \
       --log-level=debug \
       >>  $LOG_DIR/jaeger-collector.stdout.log \
       2>> $LOG_DIR/jaeger-collector.stderr.log

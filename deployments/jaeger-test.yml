@@ -3,7 +3,7 @@ name: jaeger-test
 
 releases:
 - name: jaeger
-  version: 0+dev.1726407841
+  version: latest
 
 stemcells:
 - alias: default
@@ -25,6 +25,9 @@ instance_groups:
     release: jaeger
     properties: {}
   - name: jaeger-remote-storage
+    release: jaeger
+    properties: {}
+  - name: jaeger-dashboard
     release: jaeger
     properties: {}
   vm_type: default

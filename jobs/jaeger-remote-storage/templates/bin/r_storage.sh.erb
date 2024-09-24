@@ -14,8 +14,7 @@ case ${1} in
 
     echo "Starting Jaeger in-memory storage"
 
-    exec chpst -u vcap:vcap /var/vcap/packages/jaeger/bin/jaeger/remote-storage-linux-amd64 \
-      --span-storage.type=memory \
+    exec chpst -u vcap:vcap /var/vcap/packages/jaeger/bin/remote-storage-linux-amd64 \
       --log-level=debug \
       >>  $LOG_DIR/jaeger-remote-storage.stdout.log \
       2>> $LOG_DIR/jaeger-remote-storage.stderr.log

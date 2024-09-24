@@ -1,0 +1,8 @@
+---
+name: jaeger-dashboard
+packages: 
+  - jaeger
+templates:
+  bin/dashboard.sh.erb: bin/dashboard.sh
+  bin/pre-start.sh.erb: bin/pre-start.sh
+  config/export_env.sh.erb: config/export_env.sh

@@ -1,0 +1,5 @@
+check process dashboard
+  with pidfile /var/vcap/sys/run/jaeger-dashboard/dashboard.pid
+  start program "/var/vcap/jobs/jaeger-dashboard/bin/dashboard.sh start"
+  stop program "/var/vcap/jobs/jaeger-dashboard/bin/dashboard.sh stop"
+  group vcap

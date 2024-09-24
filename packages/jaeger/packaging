@@ -4,8 +4,10 @@ set -u # report the usage of uninitialized variables
 export HOME=/var/vcap
 
 cd jaeger
-tar -xzf jaeger_binaries.tgz
-chmod +x jaeger
+mkdir -p binaries
+
+tar -xzf jaeger_binaries.tgz -C ./binaries
+chmod +x binaries
 
 mkdir -p $BOSH_INSTALL_TARGET/bin
-cp -a jaeger $BOSH_INSTALL_TARGET/bin
+cp -a binaries/. $BOSH_INSTALL_TARGET/bin/

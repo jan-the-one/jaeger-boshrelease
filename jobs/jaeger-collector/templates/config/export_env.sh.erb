@@ -3,3 +3,6 @@ export PACKAGE_DIR=/var/vcap/packages/jaeger-collector
 export RUN_DIR=/var/vcap/sys/run/jaeger-collector
 export LOG_DIR=/var/vcap/sys/log/jaeger-collector
 export TMP_DIR=/var/vcap/data/jaeger-collector/tmp
+export SPAN_STORAGE_TYPE=grpc
+export COLLECTOR_ZIPKIN_HOST_PORT=:9411
+export GRPC_STORAGE_SERVER=localhost:17271
