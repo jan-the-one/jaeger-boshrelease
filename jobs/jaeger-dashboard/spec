@@ -6,3 +6,31 @@ templates:
   bin/dashboard.sh.erb: bin/dashboard.sh
   bin/pre-start.sh.erb: bin/pre-start.sh
   config/export_env.sh.erb: config/export_env.sh
+#! NOT SURE IF ALL PROPERTIES BELOW ARE USEFUL FOR THE `JAEGER-QUERY` PROCESS.
+properties:
+  storage.span-storage-type:
+    description: The type of storage backend to store traces in. Supported values are [grpc, cassandra]. `grpc` uses a local in-memory storage.
+    default: grpc
+  storage.grpc-storage-server:
+    description: The address of the remote storage server. The hostname can only be localhost, whereas the port number can vary.
+    default: localhost:17271
+  storage.grpc-storage-timeout:
+    description: The connection timeout for the connection to the storage server.
+    default: 10
+  storage.cassandra.username:
+    description: The username for authentication.
+  storage.cassandra.password:
+    description: The password for authentication.
+  storage.cassandra.port:
+    description: The port number for the Cassandra connection.
+    default: 9042
+  storage.cassandra.tls.ca:
+    description: Inline TLS CA (Certification Authority) string used to verify the remote server(s).
+  storage.cassandra.tls.cert:
+    description: Inline TLS certificate string, used to identify the collector process to the remote server(s). Must be signed by the CA above.
+  storage.cassandra.tls.enabled:
+    description: Toggle this property to enable/disable TLS for the collector <-> cassandra communication.
+    default: false
+  storage.cassandra.tls.server-name:
+    description: Override the TLS server name expected in the certificate of the remote server(s).
+    default: nil

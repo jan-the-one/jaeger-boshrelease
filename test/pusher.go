@@ -18,10 +18,10 @@ func startTracing() (*trace.TracerProvider, error) {
   "content-type": "application/json",
  }
 
- exporter, err := otlptrace.New(
+ exporter, err := otlptrace.New( 
   context.Background(),
   otlptracehttp.NewClient(
-   otlptracehttp.WithEndpoint("localhost:4318"),
+   otlptracehttp.WithEndpoint("10.244.0.2:4318"),
    otlptracehttp.WithHeaders(headers),
    otlptracehttp.WithInsecure(),
   ),
@@ -30,7 +30,8 @@ func startTracing() (*trace.TracerProvider, error) {
   log.Panic("Error creating new exporter: %w", err)
  }
 
- tracerprovider := trace.NewTracerProvider(
+ tracerprovider := trace.NewTracerProvider( // Might have a new type of "trace provider" that allows us to process baggage differently
+ // alternatively we can have some eBPF based stuff
   trace.WithBatcher(
    exporter,
    trace.WithMaxExportBatchSize(trace.DefaultMaxExportBatchSize),
@@ -68,7 +69,7 @@ func main(){
 
 	tracer := tp.Tracer("pusher-jaeger")
 
- 	_, span := tracer.Start(context.Background(), "Test Span from Pusher")
+ 	_, span := tracer.Start(context.Background(), "Test Span from Pusher") //we could have a "pre-start" hook to execute code
 	defer span.End()
 
 	log.Println("sending spans..")

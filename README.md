@@ -8,12 +8,18 @@
 - Write job scripts [x]
 - Configure a Concourse setup [x]
 - Add Jaeger Dashboard [x] 
-- - This cannot really work, unless someone finds a way to access the dashboard :) 
-- Test out & fix bindings using a connector App []
-- - Connect from outside
-- Add some BOSH properties []
-- Add Makefile to build the release []
-- Add automation to produce Jaeger binaries on-demand and prepare some PR []
+- Test out & fix bindings using a connector App [x]
+- - Curling healthcheck endpoints [x]
+- - Adding some spans (using some custom-made app) [x]
+- Add BOSH properties []
+- - The env variables to wire everything need to be made parametric!
+- - In particular, the "storage" configuration is important
+- - - We should support Kafka at least
+- Add Makefile to build the release and manage the deployment []
+- - Add some target to open tunnels, or some `.dsf` script
+- Add Concourse automation to produce Jaeger binaries on-demand and prepare some PR []
+
+----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
 
 - Explore NGINX-based tracing []
 - Explore OpenTelemetry relations to Prometheus/Graphite []
@@ -48,6 +54,12 @@ https://www.jaegertracing.io/docs/1.61/sampling/
 
 - Native Connection to NGINX? [MUST DO]
 - Translation into metrics, e.g. Graphite format? [MUST DO]
+
+
+### Components
+
+- Pre-processor AGENT (sessionings)
+- Discovery / Policy / Instigator components for Fault Injection
 
 #### Session-based Tracing
 
