@@ -14,11 +14,12 @@
 - Add BOSH properties []
 - - The env variables to wire everything need to be made parametric!
 - - In particular, the "storage" configuration is important
-- - - We should support Kafka at least
+- - Must test out the TLS setup for Cassandra. 
+- - Kafka needs the "ingester" setup and is thus not supported at this time
 - Add Makefile to build the release and manage the deployment []
 - - Add some target to open tunnels, or some `.dsf` script
 - Add Concourse automation to produce Jaeger binaries on-demand and prepare some PR []
-
+- Focus on graphite Exports of Traces + Metrics !! []
 ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
 
 - Explore NGINX-based tracing []
@@ -42,10 +43,6 @@
   - High degree of customization
   - Tutorial @ https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/README.md
 
-- TODO: Add a custom storage-handler which can map traces to _metrics_. It can define custom metrics and make them available in Graphite format.
-- TODO: Create the Graphite mappings and streams
-- TODO: Create a small client that reads traces from the agent API.
-
 ---
 
 ### Sampling Strategies & Extensions of Jaeger
@@ -55,20 +52,24 @@ https://www.jaegertracing.io/docs/1.61/sampling/
 - Native Connection to NGINX? [MUST DO]
 - Translation into metrics, e.g. Graphite format? [MUST DO]
 
+- TODO: Add a custom storage-handler which can map traces to _metrics_. It can define custom metrics and make them available in Graphite format.
+- TODO: Create the Graphite mappings and streams
+- TODO: Create a small client that reads traces from the agent API.
+
 
 ### Components
 
-- Pre-processor AGENT (sessionings)
+- ~~Pre-processor AGENT (sessionings)~~
 - Discovery / Policy / Instigator components for Fault Injection
 
-#### Session-based Tracing
+#### ~~Session-based Tracing~~
 
 - Open a "Trace" at an app that keeps some local storage (remote sessions)
 - Add "metrics" to it from the service; must have some localized "agent" to do such monitoring
 - - Number of Traces
 - - CPU / MEM increase
 - - The trace events should serve as some probe-time delineator; e.g. telling the instrumentation code 
-    when to record events and so on.
+    when to record events and so on. 
 
 
 #### Split-Trace Fault-Injection & Stress Testing

@@ -8,9 +8,9 @@ templates:
   config/export_env.sh.erb: config/export_env.sh
 
 properties:
-  log-level:
-    description: The log level to use across all jaeger binaries.
-    default: debug
+  debug-logs:
+    description: Whether to enable the `debug` log level.
+    default: false
   sampling-config-type:
     description: >
      The sampling method to control the sampling rate. Available values are [file, adaptive]. 'file' implies that a configuration file can be provided;

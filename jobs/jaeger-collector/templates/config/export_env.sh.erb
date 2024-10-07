@@ -3,6 +3,29 @@ export PACKAGE_DIR=/var/vcap/packages/jaeger-collector
 export RUN_DIR=/var/vcap/sys/run/jaeger-collector
 export LOG_DIR=/var/vcap/sys/log/jaeger-collector
 export TMP_DIR=/var/vcap/data/jaeger-collector/tmp
-export SPAN_STORAGE_TYPE=grpc
+
+<% if p("debug-logs") == true%>
+    export LOG_LEVEL=debug
+<% end %>
+
+<% if_p("storage.storage-type") do |prop| %>
+    export SPAN_STORAGE_TYPE=<%= prop %>
+<% end.else do %>
+    export SPAN_STORAGE_TYPE=grpc
+<% end %>
+
 export COLLECTOR_ZIPKIN_HOST_PORT=:9411
-export GRPC_STORAGE_SERVER=localhost:17271
+
+<% if_p("storage.cassandra.username", "storage.cassandra.password") do |username, password| %> 
+
+#TODO specify the Cassandra variables here.
+
+<% end.else %>
+
+export GRPC_STORAGE_SERVER=<%= p("storage.grpc-storage-server") %>
+export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
+export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
+export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
+export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
+
+<% end %>

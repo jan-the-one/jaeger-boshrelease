@@ -8,6 +8,9 @@ templates:
   config/export_env.sh.erb: config/export_env.sh
 #! NOT SURE IF ALL PROPERTIES BELOW ARE USEFUL FOR THE `JAEGER-QUERY` PROCESS.
 properties:
+  debug-logs:
+    description: Whether to enable the `debug` log level.
+    default: false
   storage.span-storage-type:
     description: The type of storage backend to store traces in. Supported values are [grpc, cassandra]. `grpc` uses a local in-memory storage.
     default: grpc

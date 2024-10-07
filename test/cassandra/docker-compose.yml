@@ -1,0 +1,30 @@
+services:
+    cassandra:
+      image: cassandra:4.0
+
+    cassandra-schema:
+      image: jaegertracing/jaeger-cassandra-schema
+      depends_on:
+        - cassandra
+
+# ! The following service is commented out because it will run as part of the boshrelease, and connect to
+# the Cassandra service above.
+
+# jaeger-collector:
+#       image: jaegertracing/jaeger-collector
+#       command: 
+#         - "--cassandra.keyspace=jaeger_v1_dc1"
+#         - "--cassandra.servers=cassandra"
+#         - "--collector.zipkin.host-port=9411"
+#         - "--sampling.initial-sampling-probability=.5"
+#         - "--sampling.target-samples-per-second=.01"
+#       environment: 
+#         - SAMPLING_CONFIG_TYPE=adaptive
+#       ports:
+#         - "14269:14269"
+#         - "14268:14268"
+#         - "14250"
+#         - "9411:9411"
+#       restart: on-failure
+#       depends_on:
+#         - cassandra-schema
