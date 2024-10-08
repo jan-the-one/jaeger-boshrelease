@@ -1,11 +1,17 @@
 services:
     cassandra:
-      image: cassandra:4.0
+      image: cassandra:latest
+      environment:
+      - CASSANDRA_USER=root
+      - CASSANDRA_PASSWORD=pass
 
     cassandra-schema:
       image: jaegertracing/jaeger-cassandra-schema
       depends_on:
         - cassandra
+      volumes:
+      - cassandra_data:/var/lib/cassandra
+
 
 # ! The following service is commented out because it will run as part of the boshrelease, and connect to
 # the Cassandra service above.
@@ -28,3 +34,6 @@ services:
 #       restart: on-failure
 #       depends_on:
 #         - cassandra-schema
+
+volumes:
+  cassandra_data:

@@ -1,0 +1,45 @@
+---
+name: jaeger-cassandra
+
+releases:
+- name: jaeger
+  version: latest
+
+stemcells:
+- alias: default
+  os: ubuntu-jammy
+  version: latest
+
+update:
+  canaries: 2
+  max_in_flight: 1
+  canary_watch_time: 5000-60000
+  update_watch_time: 5000-60000
+
+instance_groups:
+- name: jaeger
+  azs: [z1, z2, z3]
+  instances: 1
+  jobs:
+  - name: jaeger-collector
+    release: jaeger
+    properties:
+      collector:
+        storage-type: cassandra
+        cassandra:
+          servers: 10.244.0.3
+          keyspace: jaeger_v1_dc1
+  - name: jaeger-dashboard
+    release: jaeger
+    properties:
+      query:
+        storage-type: cassandra
+        cassandra:
+          servers: 10.244.0.3
+          keyspace: jaeger_v1_dc1
+  vm_type: default
+  stemcell: default
+  persistent_disk: 512
+  networks:
+  - name: default
+

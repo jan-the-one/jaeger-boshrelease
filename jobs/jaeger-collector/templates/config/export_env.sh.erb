@@ -3,29 +3,37 @@ export PACKAGE_DIR=/var/vcap/packages/jaeger-collector
 export RUN_DIR=/var/vcap/sys/run/jaeger-collector
 export LOG_DIR=/var/vcap/sys/log/jaeger-collector
 export TMP_DIR=/var/vcap/data/jaeger-collector/tmp
+export COLLECTOR_ZIPKIN_HOST_PORT=:9411
 
-<% if p("debug-logs") == true%>
+<% if p("debug-logs") == true %>
     export LOG_LEVEL=debug
 <% end %>
 
-<% if_p("storage.storage-type") do |prop| %>
+<% if_p("collector.storage-type") do |prop| %>
     export SPAN_STORAGE_TYPE=<%= prop %>
 <% end.else do %>
     export SPAN_STORAGE_TYPE=grpc
 <% end %>
 
-export COLLECTOR_ZIPKIN_HOST_PORT=:9411
 
-<% if_p("storage.cassandra.username", "storage.cassandra.password") do |username, password| %> 
+<% if p("collector.storage-type") == "cassandra" %> 
 
-#TODO specify the Cassandra variables here.
+    export CASSANDRA_SERVERS=<%= p("collector.cassandra.servers") %>
+    export CASSANDRA_USERNAME=<%= p("collector.cassandra.username") %>
+    export CASSANDRA_PASSWORD=<%= p("collector.cassandra.password") %>
+    export CASSANDRA_PORT=<%= p("collector.cassandra.port") %>
+    <% if_p("collector.cassandra.keyspace") do |prop| %>
+        export CASSANDRA_KEYSPACE=<%= prop %>
+    <% end %>
 
-<% end.else %>
+<% else%>
 
-export GRPC_STORAGE_SERVER=<%= p("storage.grpc-storage-server") %>
-export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
-export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
-export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
-export GRPC_STORAGE_TIMEOUT=<%= p("storage.grpc-storage-timeout") %>
+    <% if ( /^(localhost):/ =~ p("collector.grpc-storage-server")) == nil %>
+        echo "ERROR: Storage server must run in localhost" >> $LOG_DIR/jaeger-collector.stderr.log
+        exit 1
+    <% end %>
+
+export GRPC_STORAGE_SERVER=<%= p("collector.grpc-storage-server") %>
+export GRPC_STORAGE_TIMEOUT=<%= p("collector.grpc-storage-timeout") %>
 
 <% end %>

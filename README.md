@@ -12,21 +12,20 @@
 - - Curling healthcheck endpoints [x]
 - - Adding some spans (using some custom-made app) [x]
 - Add BOSH properties []
-- - The env variables to wire everything need to be made parametric!
-- - In particular, the "storage" configuration is important
-- - Must test out the TLS setup for Cassandra. 
-- - Kafka needs the "ingester" setup and is thus not supported at this time
+- - Must test out the setup for Cassandra, including TLS
+- - - Fix dockerizing-boshrelease []
+- - - Test out TLS configs
 - Add Makefile to build the release and manage the deployment []
 - - Add some target to open tunnels, or some `.dsf` script
+- - Add targets to create & upload releases
 - Add Concourse automation to produce Jaeger binaries on-demand and prepare some PR []
 - Focus on graphite Exports of Traces + Metrics !! []
 ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
 
 - Explore NGINX-based tracing []
+- - https://github.com/opentracing-contrib/nginx-opentracing/blob/master/doc/Tutorial.md 
+- - NGINX has some OpenTracing plugin that can be configured to use Jaeger as a Tracing system
 - Explore OpenTelemetry relations to Prometheus/Graphite []
-
-- Design the "processor" app as a simple trace pusher
-- * In particular, add properties to specify details of Jaeger Query (dashboard), and external storages like Cassandra
 
 ---
 
